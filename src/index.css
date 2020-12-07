@@ -1,4 +1,6 @@
-html, body {
-  height: auto;
+html, body, div#root {
+  height: 100%;
   font-family: 'Nunito Sans', sans-serif;
+  margin: 0;
+  padding: 0;
 }
