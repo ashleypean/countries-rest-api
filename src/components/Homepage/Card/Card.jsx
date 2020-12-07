@@ -69,7 +69,6 @@ export default function Card() {
     population: 0, 
     region: '', 
     capital: '', 
-    code: ''
   }])
 
   //Fetch countries list from the third-party API
