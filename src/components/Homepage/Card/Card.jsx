@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import styled from 'styled-components'
 import { DarkModeContext } from '../../../utils/DarkModeHook'
@@ -8,6 +9,8 @@ const MainContainer = styled.div`
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
+  margin: 2rem 0 0 0;
+  color: ${props => props.darkMode? "black": "white"}
 `
 
 const CardContainer = styled.div`
@@ -16,14 +19,31 @@ const CardContainer = styled.div`
   width: calc(100% - 4rem);
   max-width: 500px;
   margin: 1rem 2rem;
-  height: 30rem;
-  color: ${props => props.darkMode? "black": "white"}
+  height: 25rem;
+  cursor: pointer;
+  
+
+  @media (min-width: 400px) {
+    height: 28rem;
+  }
+
+  @media (min-width: 600px) {
+    height: 32rem;
+  }
 `
 
 const Flag = styled.img`
   width: 100%;
-  height: 60%;
+  height: 40%;
   object-fit: cover;
+
+  @media (min-width: 400px) {
+    height: 50%;
+  }  
+
+  @media (min-width: 600px) {
+    height: 55%;
+  }
 `
 
 const CountryName = styled.h4`
@@ -38,17 +58,18 @@ const Text = styled.p`
 
 const Span = styled.span`
   font-weight: 600;
-  
 `
 
 export default function Card() {
+  const history = useHistory()
   const { darkMode } = useContext(DarkModeContext)
   const [countryList, setCountryList] = useState([{
     flag: '', 
     name: '', 
     population: 0, 
     region: '', 
-    capital: ''
+    capital: '', 
+    code: ''
   }])
 
   //Fetch countries list from the third-party API
@@ -57,7 +78,6 @@ export default function Card() {
       const res = await axios.get('https://restcountries.eu/rest/v2/all')
 
       let data = res.data
-      console.log(data)
 
       setCountryList(
         data.map(country => {
@@ -75,14 +95,21 @@ export default function Card() {
     getData()
   }, [])
 
+  //On click of card, link user to search results for that country
+  const handleClick = (e) => {
+    const divName = e.target.parentElement.getAttribute('name')
+    history.push(`/search/${divName}`)
+  }
+
   return (
-    <MainContainer>
+    <MainContainer darkMode={darkMode}>
 
       {countryList.map((country, index) => {
         if(index <= 10) {
           return (
-            <CardContainer darkMode={darkMode} key={index} >
-              <Flag src={country.flag} loading="eager"/>
+
+            <CardContainer darkMode={darkMode} key={index} onClick={handleClick} name={country.name}>
+              <Flag src={country.flag} name={country.name}loading="eager"/>
               <CountryName>{country.name}</CountryName>
               <Text>
                 <Span >Population: </Span>
@@ -98,11 +125,13 @@ export default function Card() {
               <Span>Capital: </Span>
               {country.capital}
               </Text>
-          </CardContainer>
+            </CardContainer>
+            
+
           )
         }else 
           return (
-            <CardContainer darkMode={darkMode} key={index}>
+            <CardContainer darkMode={darkMode} key={index} onClick={handleClick} name={country.name}>
               <Flag src={country.flag} loading="lazy"/>
               <CountryName>{country.name}</CountryName>
               <Text>
@@ -119,7 +148,7 @@ export default function Card() {
               <Span>Capital: </Span>
               {country.capital}
               </Text>
-          </CardContainer>
+            </CardContainer>
         )
         
       })}
