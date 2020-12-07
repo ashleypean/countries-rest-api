@@ -8,7 +8,7 @@ import styled from 'styled-components'
 
 const AppComponent = styled.div`
   background-color: ${props => props.darkMode? "#fafafa": "#202c37"};
-  height: 100%;
+  height: auto;
 `
 
 export default function App() {
@@ -18,7 +18,7 @@ export default function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={Homepage}/>
-          <Route path="/search:country" component={SearchResult}/>
+          <Route path="/search/:country" component={SearchResult}/>
           <Route component={NotFound} />
         </Switch>
       </Router>
