@@ -15,14 +15,14 @@ const AppComponent = styled.div`
 export default function App() {
   const {darkMode} = useContext(DarkModeContext)
   return (
-      <AppComponent className="App" darkMode={darkMode}>
-        <Router>
-          <Switch>
-            <Route exact path="/" component={Homepage}/>
-            <Route path="/search:country" component={SearchResult}/>
-            <Route component={NotFound} />
-          </Switch>
-        </Router>
+    <AppComponent className="App" darkMode={darkMode}>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Homepage}/>
+          <Route path="/search:country" component={SearchResult}/>
+          <Route component={NotFound} />
+        </Switch>
+      </Router>
     </AppComponent>
   )
 }
