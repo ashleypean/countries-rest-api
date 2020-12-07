@@ -9,6 +9,7 @@ import styled from 'styled-components'
 const AppComponent = styled.div`
   background-color: ${props => props.darkMode? "#fafafa": "#202c37"};
   height: auto;
+  min-height: 100%;
 `
 
 export default function App() {
