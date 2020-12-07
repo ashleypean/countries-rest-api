@@ -2,20 +2,21 @@ import React, { useContext } from 'react'
 import styled from 'styled-components'
 import {MoonOutline} from '@styled-icons/evaicons-outline/MoonOutline'
 import {Moon} from '@styled-icons/evaicons-solid/Moon'
-import { useTheme, useThemeUpdate } from '../../utils/ThemeContext'
-import { ThemeContext } from '../../App'
+import { DarkModeContext } from '../../utils/DarkModeHook'
 
+//Update background color and font color based on darkMode Context
 const HeaderDiv = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 0 .5rem;
-  background: ${props => props.darkMode? "white": "#2B3945"}
+  background-color: ${props => props.darkMode? "white": "#2B3945"}; 
+  color: ${props => props.darkMode? "black": "white"};
 `
 
 const Title = styled.h3`
   display: inline;
-  font-weight: 650;
+  font-weight: 600;
 `
 
 const DarkModeImage = styled.svg`
@@ -27,17 +28,16 @@ const DarkModeImage = styled.svg`
 
 const DarkModeToggle = styled.p`
  font-size: 1rem;
+ cursor: pointer;
 `
 
 export default function Header(props) {
-  const darkMode = useTheme()
-  const toggleDarkMode = useThemeUpdate()
-
+  const { darkMode, toggleDarkMode } = useContext(DarkModeContext)
   return (
-    <HeaderDiv>
+    <HeaderDiv darkMode={darkMode}>
       <Title>Where in the world?</Title>
       {/* Dark mode icon and text will change when dark mode is toggled */}
-      <DarkModeToggle onClick={toggleDarkMode}>
+      <DarkModeToggle onClick={toggleDarkMode} darkMode={darkMode}>
         <DarkModeImage> {darkMode? <Moon />: <MoonOutline />} </DarkModeImage>
         {darkMode? ' Light Mode': ' Dark Mode'}
       </DarkModeToggle>
