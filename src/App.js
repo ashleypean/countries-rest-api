@@ -1,14 +1,27 @@
 import './App.css';
-import react, { useState, useEffect }from 'react'
-import { BrowserRouter as Router, Link, Switch } from 'react-router-dom'
+import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Homepage from './components/Homepage/Homepage'
+import SearchResult from './components/SearchResult/SearchResult'
+import NotFound from './components/404/NotFound'
+import {ThemeProvider}  from './utils/ThemeContext'
 
-function App() {
-  const [darkMode, setDarkMode] = useState(false)
+
+export default function App() {
   return (
-    <div className="App">
-      
-    </div>
+    <ThemeProvider>
+      {value => (
+        <div className="App">
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Homepage}/>
+            <Route path="/search/:country" component={SearchResult}/>
+            <Route component={NotFound}/>
+          </Switch>
+        </Router>
+      </div>
+      )}
+    </ThemeProvider>
   );
 }
 
-export default App;
