@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { DarkModeContext } from '../../../utils/DarkModeHook'
 import { CaretDown } from '@styled-icons/boxicons-regular/CaretDown'
+import axios from 'axios'
 
 const Dropdown = styled.div`
 margin: 1rem 1rem 0;
@@ -35,14 +36,44 @@ padding: .5rem 2rem;
 }
 `
 
-export default function Filter() {
+export default function Filter(props) {
   const { darkMode } = useContext(DarkModeContext)
-  const listItems = ['Africa', 'America', 'Asia', 'Europe', 'Oceania']
+  const listItems = ['All', 'Africa', 'Americas', 'Asia', 'Europe', 'Oceania']
+  const { setCountryList } = props
 
   //Hide or show the filter dropdown on click
   const toggleDropdown = () => {
     const list = document.querySelector('ul')
     list.hidden? list.hidden = false: list.hidden = true
+  }
+
+  //Reset the state based on the region that the user selects 
+   const changeRegion = async (e) => {
+    const region = e.target.innerText
+    let res 
+    let data
+
+    //Filter API request for specific region or for all countries 
+    if(region !== 'All') { //Specific region
+      res = await axios.get(`https://restcountries.eu/rest/v2/region/${region}`)
+      data = res.data
+    }else { //Al countries
+      res = await axios.get('https://restcountries.eu/rest/v2/all')
+      data = res.data
+    }
+
+    //Update Country list state based on user selection
+    setCountryList(
+      data.map(country => {
+        return {
+        flag: country.flag, 
+        name: country.name, 
+        population: country.population.toLocaleString(), 
+        region: country.region, 
+        capital: country.capital
+        }
+      })
+    )
   }
 
   return (
@@ -52,7 +83,9 @@ export default function Filter() {
       </Dropdown>
       <DropdownList darkMode={darkMode} hidden={true}>
         {listItems.map((item, index) => (
-          <DropdownListItem darkMode={darkMode} key={index}>{item}</DropdownListItem>
+          <DropdownListItem darkMode={darkMode} key={index} onClick={changeRegion}>
+            {item}
+          </DropdownListItem>
         ))}
       </DropdownList>
     </>
