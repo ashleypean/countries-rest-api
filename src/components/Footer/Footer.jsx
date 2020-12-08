@@ -24,7 +24,7 @@ export default function Footer() {
   const { darkMode } = useContext( DarkModeContext)
   return (
     <FooterDiv darkMode={darkMode}> 
-      <Text>Built with <svg>{SuitHeartFill}</svg> by Ashley Pean</Text>
+      <Text>Built with &hearts; by Ashley Pean</Text>
       <Text>Challenge by FrontendMentor</Text>
     </FooterDiv>
   )
