@@ -39,8 +39,8 @@ export default function SearchBar(props) {
   const { setCountryList, permCountryList } = props
 
   const handleChange = (e) => {
-    const userInput = e.target.value
-    setCountryList(permCountryList.filter(country => country.name.includes(userInput)))
+    const userInput = e.target.value.toLowerCase()
+    setCountryList(permCountryList.filter(country => country.name.toLowerCase().includes(userInput)))
   }
 
   return (
