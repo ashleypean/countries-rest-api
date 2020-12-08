@@ -22,11 +22,19 @@ const CardContainer = styled.div`
   cursor: pointer;
 
   @media (min-width: 400px) {
-    height: 28rem;
+    height: 24rem;
+    
   }
 
   @media (min-width: 600px) {
-    height: 32rem;
+    height: 30rem;
+    width: calc(50% - 4rem);
+  }
+
+  @media (min-width: 1000px) {
+    width: 20%;
+    height: auto;
+    margin: 2rem 1rem;
   }
 `
 
@@ -42,16 +50,30 @@ const Flag = styled.img`
   @media (min-width: 600px) {
     height: 55%;
   }
+
+  @media (min-width: 1000px) {
+    height: 50%;
+  }
 `
 
 const CountryName = styled.h4`
   font-weight: 600;
   margin-left: 1rem;
+
+  @media (min-width: 1000px) {
+    font-size: .8rem;
+    margin: .5rem 0 1rem 1rem;
+  }
 `
 
 const Text = styled.p`
   font-weight: 400;
   margin-left: 1rem;
+
+  @media (min-width: 1000px) {
+    font-size: .8rem;
+    margin: 0 0 .2rem 1rem;
+  }
 `
 
 const Span = styled.span`
