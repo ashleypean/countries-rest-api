@@ -47,7 +47,9 @@ export default function Filter() {
 
   return (
     <>
-      <Dropdown darkMode={darkMode} onClick={toggleDropdown}> Filter by Region </Dropdown>
+      <Dropdown darkMode={darkMode} onClick={toggleDropdown}> 
+        Filter by Region 
+      </Dropdown>
       <DropdownList darkMode={darkMode} hidden={true}>
         {listItems.map((item, index) => (
           <DropdownListItem darkMode={darkMode} key={index}>{item}</DropdownListItem>
