@@ -20,6 +20,7 @@ export default function App() {
         <Switch>
           <Route exact path="/" component={Homepage}/>
           <Route path="/search/:country" component={SearchResult}/>
+          <Route path="/404" component={NotFound} />
           <Route component={NotFound} />
         </Switch>
       </Router>
