@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { DarkModeContext } from '../../../utils/DarkModeHook'
 
@@ -70,8 +71,13 @@ const Button = styled.button`
 
 export default function Stats(props) {
   const { darkMode } = useContext(DarkModeContext)
+  const history = useHistory()
   const {name, nativeName, population, region, subregion, capital, topDomain, currencies, languages, borderCountries} = props.searchResult
-  console.log(props.searchResult)
+
+  const handleClick = (e) => {
+    const countryCode = e.target.innerText
+    history.push(`/search/${countryCode}`)
+  }
 
   return (
     <Container darkMode={darkMode}>
@@ -111,13 +117,13 @@ export default function Stats(props) {
         <Text>  
           <Span>Languages: </Span> 
           {languages.map((x, index) =>
-          index !== languages.length-1? <InlineSpan>{x.name},&nbsp;</InlineSpan>: <InlineSpan>{x.name}</InlineSpan>
+          index !== languages.length-1? <InlineSpan key={index}>{x.name},&nbsp;</InlineSpan>: <InlineSpan key={index}>{x.name}</InlineSpan>
           )}
         </Text>
 
         <Div3>
           <Div3Title>Border Countries: </Div3Title>
-          {borderCountries.map((country, index) => <Button key={index} darkMode={darkMode}>{country}</Button>)}
+          {borderCountries.map((country, index) => <Button key={index} darkMode={darkMode} onClick={handleClick}>{country}</Button>)}
         </Div3>
       </Div2>
         
