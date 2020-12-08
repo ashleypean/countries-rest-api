@@ -13,7 +13,6 @@ export default function Homepage() {
       <SearchBar />
       <Filter />
       <Card />
-      <Footer />
     </div>
   )
 }
