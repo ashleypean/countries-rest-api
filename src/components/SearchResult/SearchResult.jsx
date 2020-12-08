@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Redirect } from 'react-router-dom'
 import Header from '../Header/Header'
 import Back from './BackButton/BackButton'
 import Flag from './Content/Flag'
@@ -20,15 +20,50 @@ export default function SearchResult() {
     capital: '', 
     topDomain: '', 
     currencies: '', 
-    languages: '', 
+    languages: ['', ''], 
     borderCountries: ['', '']
   })
 
   useEffect( () => {
     async function getData() {
-      const res = await axios.get('https://restcountries.eu/rest/v2/name/' + country)
+      let res 
+      let data
+      //Full name searches
+      if(country.length > 3) {
+        res = await axios.get('https://restcountries.eu/rest/v2/name/' + country)
+        //Log error message to console and redirect to 404 page
+        .catch(err => {
+          if(err.response) {
+            console.log(err.response.data)
+            console.log(err.response.status)
+            console.log(err.response.headers)
+          }else if(err.request) {
+            console.log(err.request)
+          }else {
+            console.log('Error: ', err.message)
+          }
+          return window.location.href = "/404"
+        })
+        data = res.data[0]
 
-      const data = res.data
+      //Country code searches
+      }else {
+        res = await axios.get('https://restcountries.eu/rest/v2/alpha/' + country)
+        //Log error message to console and redirect to 404 page
+        .catch(err => {
+          if(err.response) {
+            console.log(err.response.data)
+            console.log(err.response.status)
+            console.log(err.response.headers)
+          }else if(err.request) {
+            console.log(err.request)
+          }else {
+            console.log('Error: ', err.message)
+          }
+          return window.location.href = "/404"
+       })
+        data = res.data
+      }
 
       setSearchResult({
         flag: data.flag,
@@ -44,16 +79,16 @@ export default function SearchResult() {
         borderCountries: data.borders        
       })
     }
-
     getData()
-  }, [])
+    
+  }, [country])
 
   return (
     <div>
       <Header />
-      <Back flag={searchResult.flag}/>
-      <Flag />
-      <Stats />
+      <Back />
+      <Flag flag={searchResult.flag}/>
+      <Stats searchResult={searchResult} />
     </div>
   )
 }
