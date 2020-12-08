@@ -17,6 +17,14 @@ export default function Homepage() {
     capital: '', 
   }])
 
+  const [permCountryList, setPermCountryList] = useState([{
+    flag: '', 
+    name: '', 
+    population: 0, 
+    region: '', 
+    capital: '', 
+  }])
+
   //Fetch countries list from the third-party API
   useEffect(  () => {
     async function getData(){
@@ -24,7 +32,7 @@ export default function Homepage() {
 
       let data = res.data
 
-      setCountryList(
+      setPermCountryList(
         data.map(country => {
           return {
           flag: country.flag, 
@@ -35,16 +43,21 @@ export default function Homepage() {
           }
         })
       )
-
     }
     getData()
   }, [])
+
+  //Updte the temporary countryList state when PermState changes
+  useEffect( () => {  
+    setCountryList(permCountryList)
+  }, [permCountryList])
+
   return (
     <div>
       <Header />
-      <SearchBar />
-      <Filter setCountryList={setCountryList}/>
-      <Card countryList={countryList}/>
+      <SearchBar permCountryList={permCountryList} setCountryList={setCountryList}/>
+      <Filter setPermCountryList={setPermCountryList}/>
+      <Card countryList={countryList} />
     </div>
   )
 }

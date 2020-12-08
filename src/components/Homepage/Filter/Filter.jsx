@@ -39,7 +39,7 @@ padding: .5rem 2rem;
 export default function Filter(props) {
   const { darkMode } = useContext(DarkModeContext)
   const listItems = ['All', 'Africa', 'Americas', 'Asia', 'Europe', 'Oceania']
-  const { setCountryList } = props
+  const { setPermCountryList } = props
 
   //Hide or show the filter dropdown on click
   const toggleDropdown = () => {
@@ -62,8 +62,7 @@ export default function Filter(props) {
       data = res.data
     }
 
-    //Update Country list state based on user selection
-    setCountryList(
+    setPermCountryList(
       data.map(country => {
         return {
         flag: country.flag, 
