@@ -1,6 +1,5 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, {  useContext } from 'react'
 import { useHistory } from 'react-router-dom'
-import axios from 'axios'
 import styled from 'styled-components'
 import { DarkModeContext } from '../../../utils/DarkModeHook'
 
@@ -21,7 +20,6 @@ const CardContainer = styled.div`
   margin: 1rem 2rem;
   height: 25rem;
   cursor: pointer;
-  
 
   @media (min-width: 400px) {
     height: 28rem;
@@ -58,41 +56,15 @@ const Text = styled.p`
 
 const Span = styled.span`
   font-weight: 600;
+  text-transform: capitalize;
 `
 
-export default function Card() {
+export default function Card(props) {
   const history = useHistory()
   const { darkMode } = useContext(DarkModeContext)
-  const [countryList, setCountryList] = useState([{
-    flag: '', 
-    name: '', 
-    population: 0, 
-    region: '', 
-    capital: '', 
-  }])
+  const {countryList} = props
 
-  //Fetch countries list from the third-party API
-  useEffect(  () => {
-    async function getData(){
-      const res = await axios.get('https://restcountries.eu/rest/v2/all')
-
-      let data = res.data
-
-      setCountryList(
-        data.map(country => {
-          return {
-          flag: country.flag, 
-          name: country.name, 
-          population: country.population.toLocaleString(), 
-          region: country.region, 
-          capital: country.capital
-          }
-        })
-      )
-
-    }
-    getData()
-  }, [])
+  const statCategories = ['population', 'region', 'capital']
 
   //On click of card, link user to search results for that country
   const handleClick = (e) => {
@@ -102,55 +74,23 @@ export default function Card() {
 
   return (
     <MainContainer darkMode={darkMode}>
+      {countryList.map((country, index) => (
+        <CardContainer darkMode={darkMode} key={index} onClick={handleClick} name={country.name}>
 
-      {countryList.map((country, index) => {
-        if(index <= 10) {
-          return (
+        {/* Add lazy loading for cards not on page, eager for the first three cards*/}
+        {index <=2? <Flag src={country.flag} name={country.name}loading="eager"/>: <Flag src={country.flag} loading="lazy"/>}
 
-            <CardContainer darkMode={darkMode} key={index} onClick={handleClick} name={country.name}>
-              <Flag src={country.flag} name={country.name}loading="eager"/>
-              <CountryName>{country.name}</CountryName>
-              <Text>
-                <Span >Population: </Span>
-                {country.population}
-              </Text>
+        <CountryName>{country.name}</CountryName>
 
-              <Text>
-                <Span>Region: </Span>
-                {country.region}
-              </Text>
-      
-              <Text>
-              <Span>Capital: </Span>
-              {country.capital}
-              </Text>
-            </CardContainer>
-            
-
-          )
-        }else 
-          return (
-            <CardContainer darkMode={darkMode} key={index} onClick={handleClick} name={country.name}>
-              <Flag src={country.flag} loading="lazy"/>
-              <CountryName>{country.name}</CountryName>
-              <Text>
-                <Span >Population: </Span>
-                {country.population}
-              </Text>
-
-              <Text>
-                <Span>Region: </Span>
-                {country.region}
-              </Text>
-      
-              <Text>
-              <Span>Capital: </Span>
-              {country.capital}
-              </Text>
-            </CardContainer>
-        )
-        
-      })}
+        {/* Generate stats dynamically with map function; stats on line 69*/}
+        {statCategories.map((category, index) => (
+          <Text key={index}>
+            <Span>{category + ': '}</Span>
+            {country[category]}
+          </Text>
+          ))}          
+        </CardContainer>
+      ))}
     </MainContainer>
   )
 }
