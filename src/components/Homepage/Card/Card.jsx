@@ -16,40 +16,40 @@ const CardContainer = styled.div`
   display: inline;
   background: ${props => props.darkMode? "white": "#2B3945"};
   width: calc(100% - 4rem);
-  max-width: 500px;
+  max-width: 300px;
   margin: 1rem 2rem;
-  height: 25rem;
+  height: auto;
+  padding: 0 0 1rem 0;
   cursor: pointer;
 
-  @media (min-width: 400px) {
+  @media (min-width: 600px) {
     height: 24rem;
-    
+    width: calc(100% - 4rem);
   }
 
-  @media (min-width: 600px) {
-    height: 30rem;
+  @media (min-width: 700px) {
     width: calc(50% - 4rem);
   }
 
   @media (min-width: 1000px) {
-    width: 20%;
-    height: auto;
+    width: calc(33% - 4rem);
+    padding: 0;
+  }
+
+  @media (min-width: 1200px) {
+    width: calc(26% - 4rem);
     margin: 2rem 1rem;
   }
 `
 
 const Flag = styled.img`
   width: 100%;
-  height: 40%;
+  height: 50%;
   object-fit: cover;
 
   @media (min-width: 400px) {
-    height: 50%;
-  }  
-
-  @media (min-width: 600px) {
     height: 55%;
-  }
+  }  
 
   @media (min-width: 1000px) {
     height: 50%;
@@ -58,21 +58,24 @@ const Flag = styled.img`
 
 const CountryName = styled.h4`
   font-weight: 600;
-  margin-left: 1rem;
+  margin: 1rem 0 .75rem 1rem;
+
+  @media (min-width: 400px) {
+    font-size: 1.2rem;
+  }
 
   @media (min-width: 1000px) {
-    font-size: .8rem;
     margin: .5rem 0 1rem 1rem;
   }
 `
 
 const Text = styled.p`
   font-weight: 400;
-  margin-left: 1rem;
+  margin: 0 0 .7rem 1rem;
+  font-size: 110%;
 
-  @media (min-width: 1000px) {
-    font-size: .8rem;
-    margin: 0 0 .2rem 1rem;
+  @media (min-width: 400px) {
+    font-size: 130%;
   }
 `
 
