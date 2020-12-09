@@ -94,7 +94,8 @@ export default function Card(props) {
 
   //On click of card, link user to search results for that country
   const handleClick = (e) => {
-    const divName = e.target.parentElement.getAttribute('name')
+    const parentDiv = e.target.closest('div.contain')
+    const divName = parentDiv.getAttribute('name')
     console.log(divName)
     history.push(`/search/${divName}`)
   }
@@ -102,7 +103,7 @@ export default function Card(props) {
   return (
     <MainContainer darkMode={darkMode}>
       {countryList.map((country, index) => (
-        <CardContainer darkMode={darkMode} key={index} onClick={handleClick} name={country.name}>
+        <CardContainer darkMode={darkMode} key={index} onClick={handleClick} name={country.name} className="contain">
 
         {/* Add lazy loading for cards not on page, eager for the first three cards*/}
         {index <=10? <Flag src={country.flag} loading="eager"/>: <Flag src={country.flag} loading="lazy"/>}
