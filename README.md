@@ -1,5 +1,7 @@
 # Countries Rest API Project
 
+[![Video Walkthrough](https://img.youtube.com/vi/2wwytvwdBgM/0.jpg)](https://www.youtube.com/watch?v=2wwytvwdBgM)
+
 This project was built off of a challenge created by [Frontend Mentor](https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca)
 
 The application allows the user to search through a list of all 250 countries and select each country to gain additional details. 
