@@ -20,3 +20,8 @@ Each country's search result will also display the border countries, so that the
 - Styled Components
 - Styled Icons
 - Jest 
+
+### Changes to Be Implemented 
+
+- Loading images that will show on screen while API calls are running, courtesty of [react-loading-skeleton](https://github.com/dvtng/react-loading-skeleton)
+- Fixing styling of dropdown filter menu 
