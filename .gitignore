@@ -21,3 +21,12 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+.eslintcache
+
+*.eslintcache
+
+app/.eslintcache
+
+package.json
