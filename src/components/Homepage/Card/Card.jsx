@@ -1,5 +1,5 @@
 import React, {  useContext } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { DarkModeContext } from '../../../utils/DarkModeHook'
 
@@ -86,7 +86,6 @@ const Span = styled.span`
 
 export default function Card(props) {
   const history = useHistory()
-  const { country } = useParams()
   const { darkMode } = useContext(DarkModeContext)
   const {countryList} = props
 

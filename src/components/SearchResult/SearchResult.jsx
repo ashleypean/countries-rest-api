@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, Redirect } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import Header from '../Header/Header'
 import Back from './BackButton/BackButton'
 import Flag from './Content/Flag'

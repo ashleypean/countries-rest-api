@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
-import {MoonOutline} from '@styled-icons/evaicons-outline/MoonOutline'
 import {Moon} from '@styled-icons/evaicons-solid/Moon'
 import {Sun} from '@styled-icons/evaicons-solid/Sun'
 import { DarkModeContext } from '../../utils/DarkModeHook'
