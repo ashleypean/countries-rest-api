@@ -1,14 +1,11 @@
 import React, { useState, useEffect} from 'react'
-import './Homepage.css'
 import Header from '../Header/Header'
 import Filter from './Filter/Filter'
 import SearchBar from './SearchBar/SearchBar'
 import Card from './Card/Card'
-import Footer from '../Footer/Footer'
 import axios from 'axios'
 
 export default function Homepage() {
-
   const [countryList, setCountryList] = useState([{
     flag: '', 
     name: '', 
