@@ -1,5 +1,5 @@
 import React, {  useContext } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { DarkModeContext } from '../../../utils/DarkModeHook'
 
@@ -86,6 +86,7 @@ const Span = styled.span`
 
 export default function Card(props) {
   const history = useHistory()
+  const { country } = useParams()
   const { darkMode } = useContext(DarkModeContext)
   const {countryList} = props
 
@@ -94,6 +95,7 @@ export default function Card(props) {
   //On click of card, link user to search results for that country
   const handleClick = (e) => {
     const divName = e.target.parentElement.getAttribute('name')
+    console.log(divName)
     history.push(`/search/${divName}`)
   }
 
@@ -103,14 +105,14 @@ export default function Card(props) {
         <CardContainer darkMode={darkMode} key={index} onClick={handleClick} name={country.name}>
 
         {/* Add lazy loading for cards not on page, eager for the first three cards*/}
-        {index <=2? <Flag src={country.flag} name={country.name}loading="eager"/>: <Flag src={country.flag} loading="lazy"/>}
+        {index <=10? <Flag src={country.flag} loading="eager"/>: <Flag src={country.flag} loading="lazy"/>}
 
         <CountryName>{country.name}</CountryName>
 
         {/* Generate stats dynamically with map function; stats on line 69*/}
         {statCategories.map((category, index) => (
-          <Text key={index}>
-            <Span>{category + ': '}</Span>
+          <Text key={index} >
+            <Span >{category + ': '}</Span>
             {country[category]}
           </Text>
           ))}          
