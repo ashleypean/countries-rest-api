@@ -1,6 +1,6 @@
 # Countries Rest API Project
 
-[![Video Walkthrough](./cover-image.png)](https://www.youtube.com/watch?v=2wwytvwdBgM)
+[![Video Walkthrough](https://raw.githubusercontent.com/ashleypean/countries-rest-api/main/src/img/cover-image.png)](https://www.youtube.com/watch?v=2wwytvwdBgM)
 
 This project was built off of a challenge created by [Frontend Mentor](https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca)
 
