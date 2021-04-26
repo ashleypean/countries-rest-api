@@ -88,7 +88,7 @@ export default function Filter(props) {
 
   return (
     <>
-      <Dropdown darkMode={darkMode} onClick={toggleDropdown} onMouseEnter={toggleDropdown} > 
+      <Dropdown darkMode={darkMode} onMouseEnter={toggleDropdown} > 
         Filter by Region 
         <DropdownIcon />
       </Dropdown>
